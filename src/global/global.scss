@@ -1,0 +1,63 @@
+//全局共用的css类，只需要在App.vue中引用一次即可
+
+.clearfix{
+    &:after {
+        clear:both;
+        content: "";
+        display: block;
+    }
+}
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
+}
+.url {
+    color: $fontColor;
+    &:hover{
+        color: $fontColor;
+        text-decoration:underline;
+    }
+}
+
+.btn {
+    width: 100px;
+    height: 26px;
+    line-height: 26px;
+    border: 2px solid $decorateColor;
+    color:$decorateColor ;
+    border-radius: 35px;
+    margin: 0 auto;
+    cursor: pointer;
+    @include transition ();
+    &:hover{
+        color:white ;
+        background-color: $decorateColor ;
+    }
+    
+}
+.input {
+    width: 160px;
+    height: 35px;
+    padding: 0 40px 0 20px;
+    border: 1px solid #eee;
+    border-radius: 40px;
+    background: #eee;
+    font-family: 'Monda','Source Sans Pro','\5FAE\8F6F\96C5\9ED1', sans-serif;
+    margin-top: 10px;
+}
+.input-simple,textarea {
+    padding: 5px 1.8%;
+    border: 1px solid #eee;
+    // background: #fcfcfc;
+    font-family: 'Monda','Source Sans Pro','\5FAE\8F6F\96C5\9ED1', sans-serif;
+    outline: none;
+    box-shadow: none;
+}
