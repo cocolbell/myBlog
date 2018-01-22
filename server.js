@@ -14,6 +14,7 @@ var api = require('./server/api')
 
 var mongoose = require('mongoose')
 var option = {
+    useMongoClient:true,
     server: {
         socketOptions: {
             keepAlive: 300000,

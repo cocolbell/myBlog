@@ -62,7 +62,6 @@ var articleFindById = function(req,res){
 }
 
 var articleFindByPage = function(req,res){
-    console.log(req.query)
     Article.findByPage(req.query.page,function (err,docs){
         if(err) {
             res.json({result: 'fail', reason: err});
@@ -105,11 +104,47 @@ var findAllCategory = function(req,res){
     });
 }
 
+var findByTag = function(req,res){
+    Article.findByTag(req.query.tagName,function (err,docs){
+        if(err) {
+            res.json({result: 'fail', reason: err});
+        }
+        else {
+            res.json({result: 'success', message: docs});
+        }
+    });
+}
+
+var findByCate = function(req,res){
+    Article.findByCate(req.query.cateName,function (err,docs){
+        if(err) {
+            res.json({result: 'fail', reason: err});
+        }
+        else {
+            res.json({result: 'success', message: docs});
+        }
+    });
+}
+
+var findByMonth = function(req,res){
+    Article.findByMonth(req.query.year,req.query.month,function (err,docs){
+        if(err) {
+            res.json({result: 'fail', reason: err});
+        }
+        else {
+            res.json({result: 'success', message: docs});
+        }
+    });
+}
+
 module.exports = {
     new : articleNew,
     findAll : articleFindAll,
     findById : articleFindById,
     findByPage : articleFindByPage,
+    findByTag : findByTag,
+    findByCate : findByCate,
+    findByMonth : findByMonth,
     findAllTags : findAllTags,
     findAllCategory : findAllCategory
 }

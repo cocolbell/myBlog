@@ -30,6 +30,12 @@ router.get('/api/article/getArticlesById', Article.findById)
 
 router.get('/api/article/getByPage', Article.findByPage)
 
+router.get('/api/article/getByMonth', Article.findByMonth)
+
+router.get('/api/article/getByTag', Article.findByTag)
+
+router.get('/api/article/getByCategory', Article.findByCate)
+
 router.get('/api/tag/getAll', Article.findAllTags)
 
 router.get('/api/category/getAll', Article.findAllCategory)

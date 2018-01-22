@@ -32,4 +32,28 @@ articleSchema.statics.findAllFileds = function (filed,cb) {
 	.exec(cb)
 }
 
+articleSchema.statics.findByTag = function (tagVal,cb) {
+	this.find({})
+	.where('tag')
+	.in([tagVal])
+	.exec(cb)
+}
+
+articleSchema.statics.findByCate = function (cateVal,cb) {
+	this.find({})
+	.where('category')
+	.in(cateVal)
+	.exec(cb)
+}
+
+articleSchema.statics.findByMonth = function (year,month,cb) {
+	var nextMonth = month == 12 ? 1: (parseInt(month) + 1);
+	this.find({})
+	.where('date')
+	.gt(new Date(year + '-' + month + '-1 00:00:00'))
+	.lt(new Date(year + '-' + nextMonth + '-1 00:00:00'))
+	.exec(cb)
+}
+
+
 module.exports = mongoose.model('Article', articleSchema)

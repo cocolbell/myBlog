@@ -1,21 +1,20 @@
 <template>
     <div  class="interestPage clearfix">
-      	<div class="intersest-head">一些<br>有的<br>没的</div>
-        <img src="./../fly.svg" alt="#">
+        <err></err>
     </div>
 </template>
 
 <script>
-import selfIntro from './../components/selfIntro.vue'
+import err from './../components/err.vue'
 export default {
-  name: 'app',
+  name: 'interests',
   data () {
     return {
       
     }
   },
   components: {
-      
+      err
   },
   methods : {
      
@@ -27,6 +26,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./../global/vars.scss";
 .interestPage {
     .intersest-head{
         text-align: left;
