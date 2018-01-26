@@ -1,7 +1,7 @@
 <template>
     <div class="nav">
         <div class="nav-wrapper clearfix">
-            <p class="nav-logo">这里是LOGO</p>
+            <p class="nav-logo">没有LOGO</p>
             <searchBar></searchBar>
             <div class="nav-list">
                 <div class="nav-tab" 
@@ -55,7 +55,6 @@ export default {
     methods : {
         switchTab (index) {
             this.activeIndex = index;
-            // this.$route.push('home')
         }
     },
     mounted () {

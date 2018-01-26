@@ -1,7 +1,7 @@
 <template>
     <div class="comments text-left">
         <div class="comments-head">
-            <span>{{config.title}}({{comments.length}})</span>
+            <span>{{title}}({{comments.length}})</span>
         </div>
         <div class="comments-body">
             <div class="comment" 
@@ -21,7 +21,7 @@
             <p v-if="comments.length == 0" class="none-tip">暂无评论</p>
         </div>
         <div class="comments-foot">
-            <p class="commentE-head">{{config.btnCont}}</p>
+            <p class="commentE-head">{{btnCont}}</p>
             <p class="commentE-tip">电子邮件地址不会被公开。 必填项已用<span>*</span>标注</p>
             <div class="commentE-inputs clearfix">
                 <div class="left">
@@ -42,7 +42,10 @@
                 </div>
             </div>
             <div class="btn-group">
-                <div class="btn">{{config.btnCont}}</div>
+                <div class="btn" @click="submitComment">{{btnCont}}</div>
+            </div>
+            <div class="commentE-alert" v-show="tipFlag">
+                <p>{{tip}}</p>
             </div>
         </div>
     </div>
@@ -53,6 +56,17 @@ import subComment from './../components/subComment.vue'
 export default {
     name: 'comments',
     props: ['config' , 'articleId'],
+    props: {
+        title : {
+            default: '全部评论'
+        },
+        articleId : {
+            required: true
+        },
+        btnCont : {
+            default: '发表评论'
+        }
+    },
     data () {
         return {
             comments : [
@@ -64,26 +78,63 @@ export default {
                 userName : '',
                 email : '',
                 webSite : ''
-            }
+            },
+            tip : '不能为空',
+            tipFlag : false
         }
     },
     components: {
-      subComment
+        subComment
     },
     methods : {
         getComment () {
-            var self = this;
+            var vm = this;
             this.$ajax({
                 method: 'get',
-                url: '/api/comment/getByArtic?articId=' + self.articleId,
+                url: '/api/comment/getByArtic?articId=' + vm.articleId,
             }).then(function(res){
                 if(res.data.result == "success") {
-                    self.comments = res.data.message;
+                    vm.comments = res.data.message;
                 }
             })
             .catch(function(err){
                 console.log(err);
             })
+        },
+        submitComment () {
+            var vm = this;
+            if (this.commentValidate()) {
+                this.$ajax({
+                    method: 'post',
+                    url: '/api/comment/new',
+                    data : vm.newComment
+                }).then(function(res){
+                    if(res.data.result == "success") {
+                        vm.newComment.userName = '';
+                        vm.newComment.content = '';
+                        vm.newComment.email = '';
+                        vm.getComment();
+                    }
+                })
+                .catch(function(err){
+                    console.log(err);
+                })
+            } 
+        },
+        showTip (text) {
+            this.tip = text;
+            this.tipFlag = true;
+        },
+        commentValidate () {
+            for (var key in this.newComment) {
+                if (!this.newComment[key] && key!='articId' && key!='webSite') {
+                    var name = key == 'content' ? '内容' : key == 'userName' ? '姓名' : key == 'email' ? '邮箱' : '';
+                    this.showTip(name + '不可以为空');
+                    return false;
+                }
+            }
+            this.tipFlag = false;
+            return true;
         },
         commentEnter () {
 
@@ -98,7 +149,6 @@ export default {
     },
     created (){
         this.getComment();
-        console.log(this._Global.toCn(new Date()))
     }
 }
 </script>
@@ -106,74 +156,79 @@ export default {
 <style lang="scss">
 @import "./../global/vars.scss";
 .comments {
-   padding-top: 15px;
-   .comments-head {
-       color: $emfontColor;
-       font-size: 1.1rem;
-       padding-bottom: 15px;
-   }
-   .comment {
-       padding-top:17px; 
-   }
-   .commentInfo-name {
-       font-size: 1.0rem;
-       margin-right: 5px;
-       color: $emfontColor;
-   }
-   .commentInfo-time {
-       font-size: 0.8rem;
-   }
-   .commentInfo-reply {
-       margin-right: 15px;
-       cursor: pointer;
-       color: $emfontColor;       
-   }
-   .comment-cont {
+    padding-top: 15px;
+    .comments-head {
+        color: $emfontColor;
+        font-size: 1.1rem;
+        padding-bottom: 15px;
+    }
+    .comment {
+        padding-top:17px; 
+    }
+    .commentInfo-name {
+        font-size: 1.0rem;
+        margin-right: 5px;
+        color: $emfontColor;
+    }
+    .commentInfo-time {
+        font-size: 0.8rem;
+    }
+    .commentInfo-reply {
+        margin-right: 15px;
+        cursor: pointer;
+        color: $emfontColor;       
+    }
+    .comment-cont {
         padding: 17px 0;
         font-size: 1.1rem;
         @include border(0,0,1,0);
         color: $emfontColor;
-   }
-   .commentE-head {
-       color: $emfontColor;
-       font-size: 1.1rem;
-   }
-   .comments-foot {
-       padding-top: 30px;
-   }
-   .commentE-tip {
+    }
+    .commentE-head {
+        color: $emfontColor;
+        font-size: 1.1rem;
+    }
+    .comments-foot {
+        padding-top: 30px;
+    }
+    .commentE-tip {
         padding-top: 15px;
         font-size: 1.0rem;
-   }
-   .commentE-inputs {
-       padding: 15px 0;
-       input {
-        width: 200px;
-        padding: 5px 10px;
-       }
-       .margin-left{
+    }
+    .commentE-inputs {
+        padding: 15px 0;
+        input {
+            width: 200px;
+            padding: 5px 10px;
+        }
+        .margin-left{
             margin-left:15px;
-       } 
-       p{
-        padding-bottom: 10px;
-        font-size: 1.0rem;
-       }
-       span {
-           color:$decorateColor;
-       }
-   }
-   .commentE-cont {
-       padding-top: 15px;
-       textarea{
+        } 
+        p{
+            padding-bottom: 10px;
+            font-size: 1.0rem;
+        }
+        span {
+            color:$decorateColor;
+        }
+    }
+    .commentE-cont {
+        padding-top: 15px;
+        textarea{
             width: 675px;
             height: 100px;
             padding: 10px;
-       }
-   }
-   .btn-group {
+        }
+    }
+    .btn-group {
         text-align: center;
         width: 697px;
-   }
+    }
+    .commentE-alert {
+        text-align: center;
+        width: 697px;
+        color:$decorateColor;
+    }
 }
 .none-tip {
     font-size: 1.2rem;

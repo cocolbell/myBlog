@@ -61,8 +61,8 @@ export default {
             }).then(function(res){
                 if(res.data.result == "success") {
                     self.articleData = res.data.message.content[0];
-                    self.articContext.prev= res.data.message.context[0];
-                    self.articContext.next = res.data.message.context[1];
+                    self.articContext.prev= res.data.message.context[1];
+                    self.articContext.next = res.data.message.context[0];
                     self.prevId = self.articContext.prev?self.articContext.prev.articId : 0;
                     self.nextId = self.articContext.next?self.articContext.next.articId : 0
                     console.log(self.prevId,self.nextId)

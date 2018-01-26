@@ -28,6 +28,8 @@ router.get('/api/article/getAllArticles', Article.findAll)
 
 router.get('/api/article/getArticlesById', Article.findById)
 
+router.get('/api/article/getPageNum', Article.getPageNum)
+
 router.get('/api/article/getByPage', Article.findByPage)
 
 router.get('/api/article/getByMonth', Article.findByMonth)

@@ -101,11 +101,11 @@ export default {
 			>p {
 				@include border(0,0,1,0,dashed);
 				margin-bottom: 8px;	
-				padding: 8px 0;		
+				padding: 8px 20px;		
 			}
 			li {
 				// display: inline-block;
-				margin-left: 35px;
+				margin-left: 50px;
 				list-style: square;
 				padding: 8px;
 			}

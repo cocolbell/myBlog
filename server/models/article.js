@@ -1,6 +1,8 @@
 
 var mongoose = require('mongoose')
 
+var pageCount = 4;
+
 var articleSchema = new mongoose.Schema({
 	articId : Number,
 	title: String,
@@ -20,11 +22,12 @@ articleSchema.statics.findLast = function () {
 articleSchema.statics.findByPage = function (page,cb) {
 	page -= 1
 	this.find({})
-	.skip(page * 5)
-	.limit(5)
+	.skip(page * pageCount)
+	.limit(pageCount)
 	.sort({'_id':-1})
 	.exec(cb)
 }
+
 
 articleSchema.statics.findAllFileds = function (filed,cb) {
 	this.find({})

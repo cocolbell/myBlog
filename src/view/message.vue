@@ -1,6 +1,6 @@
 <template>
     <div class="messagePage">
-         <comments :config = "commentsConfig"></comments>
+         <comments title='留言板' btnCont="发布留言" :config = "commentsConfig"></comments>
     </div>
 </template>
 
@@ -10,10 +10,7 @@ export default {
   name: 'message',
   data () {
     return {
-        commentsConfig : {
-            title : "留言板",
-            btnCont : "发布留言",
-        }
+        
     }
   },
   components: {

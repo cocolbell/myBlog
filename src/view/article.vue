@@ -1,7 +1,7 @@
 <template>
     <div class="articlePage">
          <article-cont :article-id = "articleId" ></article-cont>
-         <comments :config = "commentsConfig" :article-id = "articleId"></comments>
+         <comments :article-id = "articleId"></comments>
     </div>
 </template>
 
@@ -12,10 +12,7 @@ export default {
     name: 'article',
     data () {
         return {
-            commentsConfig : {
-                title : "全部评论",
-                btnCont : "发表评论",
-            }
+          
         }
     },
     components: {

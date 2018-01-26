@@ -2,8 +2,6 @@
     <div class="pagination">
         <ul class="clearfix">
             <li v-show='pageCur!=pageArr[0]'>上一页</li>
-            <!-- <li class="page-item" v-show='numOverflow.prevMore'>1</li> -->
-            <!-- <li class="page-item" v-show='numOverflow.prevMore'>...</li> -->
             <li 
                 class="page-item" 
                 v-for="(item , index) in pageArr" 
@@ -12,8 +10,6 @@
                 :class="{'active': pageCur == item}">
                 {{item}}
             </li>
-            <!-- <li class="page-item" v-show='numOverflow.nextMore'>...</li> -->
-            <!-- <li class="page-item" v-show='numOverflow.nextMore'>{{pageCount}}</li> -->
             <li v-show='pageCur!=pageArr[pageArr.length-1]'>下一页</li>    
         </ul>
     </div>

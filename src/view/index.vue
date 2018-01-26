@@ -8,7 +8,7 @@
                 :article='artic'>
             </articlePrev>
             <pagination
-                :page-count="2"
+                :page-count="pageCount"
                 :page-current="1">
             </pagination>
       	</div>
@@ -24,7 +24,8 @@ export default {
     data () {
         return {
             articDatas : [],
-            nowPage : 1
+            nowPage : 1,
+            pageCount : 1
         }
     },
     components: {
@@ -33,6 +34,20 @@ export default {
         pagination
     },
     methods : {
+        getPageNum () {
+            var vm = this;
+            this.$ajax({
+                method: 'get',
+                url: '/api/article/getPageNum',
+            }).then(function(res){
+                if(res.data.result == "success") {
+                    vm.pageCount = res.data.message;
+                }
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        },
         getArtic () {
             var vm = this;
             this.$ajax({

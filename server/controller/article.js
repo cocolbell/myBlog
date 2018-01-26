@@ -72,6 +72,19 @@ var articleFindByPage = function(req,res){
     });
 }
 
+var getPageNum = function(req,res){
+    Article.find(function(err,docs){
+        var num = parseInt(docs.length/4);
+        console.log(docs.length,num)        
+        if (err) {
+            res.json({result: 'fail', reason: err});
+        }
+        else {
+            res.json({result: 'success', message: num});
+        }
+    })  
+}
+
 var findAllTags = function(req,res){
     Article.findAllFileds('tags',function (err,docs){
         if(err) {
@@ -141,6 +154,7 @@ module.exports = {
     new : articleNew,
     findAll : articleFindAll,
     findById : articleFindById,
+    getPageNum : getPageNum,
     findByPage : articleFindByPage,
     findByTag : findByTag,
     findByCate : findByCate,
