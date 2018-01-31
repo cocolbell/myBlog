@@ -1,6 +1,6 @@
 <template>
     <div class="messagePage">
-         <comments title='留言板' btnCont="发布留言" :config = "commentsConfig"></comments>
+         <!-- <comments title='留言板' btnCont="发布留言" :config = "commentsConfig"></comments> -->
     </div>
 </template>
 

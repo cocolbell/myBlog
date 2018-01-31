@@ -55,10 +55,12 @@
 import subComment from './../components/subComment.vue'
 export default {
     name: 'comments',
-    props: ['config' , 'articleId'],
     props: {
         title : {
             default: '全部评论'
+        },
+        url : {
+            required: true
         },
         articleId : {
             required: true
@@ -91,7 +93,7 @@ export default {
             var vm = this;
             this.$ajax({
                 method: 'get',
-                url: '/api/comment/getByArtic?articId=' + vm.articleId,
+                url: vm.url.getUrl + vm.articleId,
             }).then(function(res){
                 if(res.data.result == "success") {
                     vm.comments = res.data.message;
@@ -106,7 +108,7 @@ export default {
             if (this.commentValidate()) {
                 this.$ajax({
                     method: 'post',
-                    url: '/api/comment/new',
+                    url: vm.url.newUrl,
                     data : vm.newComment
                 }).then(function(res){
                     if(res.data.result == "success") {

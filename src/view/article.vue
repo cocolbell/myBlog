@@ -1,7 +1,7 @@
 <template>
     <div class="articlePage">
          <article-cont :article-id = "articleId" ></article-cont>
-         <comments :article-id = "articleId"></comments>
+         <comments :article-id = "articleId" :url = "commentUrl"></comments>
     </div>
 </template>
 
@@ -12,7 +12,10 @@ export default {
     name: 'article',
     data () {
         return {
-          
+            commentUrl : {
+                getUrl : '/api/comment/getByArtic?articId=',
+                newUrl : '/api/comment/new'
+            }
         }
     },
     components: {
