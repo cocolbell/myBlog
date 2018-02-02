@@ -14,7 +14,8 @@ export default {
         return {
             commentUrl : {
                 getUrl : '/api/comment/getByArtic?articId=',
-                newUrl : '/api/comment/new'
+                newUrl : '/api/comment/new',
+                newReplyUrl : '/api/subComment/new'
             }
         }
     },

@@ -15,21 +15,14 @@
             <div class="article-nav clearfix">
                 <div class="article-navL left text-left">
                     <p>上一篇</p>
-                    <p>
-                        <router-link 
-                            :to = "prevId.toString()"
-                            >
-                            {{articContext.prev?articContext.prev.title : '无'}}
-                        </router-link>
+                    <p @click="routerGo(prevId)" class="prevTitle">
+                        {{articContext.prev?articContext.prev.title : '无'}}
                     </p>
                 </div>
                 <div class="article-navR right text-right">
                     <p>下一篇</p>
-                    <p>
-                        <router-link 
-                            :to = "{ name: 'articles', params: { id: nextId}}">
-                            {{articContext.next?articContext.next.title : '无'}}
-                        </router-link>
+                    <p @click="routerGo(nextId)" class="prevTitle">
+                        {{articContext.next?articContext.next.title : '无'}}
                     </p>
                 </div>
             </div>
@@ -65,12 +58,17 @@ export default {
                     self.articContext.next = res.data.message.context[0];
                     self.prevId = self.articContext.prev?self.articContext.prev.articId : 0;
                     self.nextId = self.articContext.next?self.articContext.next.articId : 0
-                    console.log(self.prevId,self.nextId)
                 }
             })
             .catch(function(err){
                 console.log(err);
             })
+        },
+        routerGo (id) {
+            if(id) {
+                this.$router.push(id.toString())
+            }   
+            else return false
         }
     },
     watch: {
@@ -143,6 +141,14 @@ export default {
                 @include transition (0.3);
             }
         }
+    }
+    .prevTitle {
+        font-size: 1.0rem;
+        color: $emfontColor;
+        cursor: pointer;
+        &:hover {
+            color: $decorateColor
+        } 
     }
 }
 </style>

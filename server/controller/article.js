@@ -75,7 +75,6 @@ var articleFindByPage = function(req,res){
 var getPageNum = function(req,res){
     Article.find(function(err,docs){
         var num = parseInt(docs.length/4);
-        console.log(docs.length,num)        
         if (err) {
             res.json({result: 'fail', reason: err});
         }
