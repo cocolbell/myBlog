@@ -5,8 +5,9 @@ var mongoose = require('mongoose')
 module.exports.new = function (req,res) {
     var newSubComment = new SubComment(req.body);
     newSubComment.save().then(function (doc){
+        console.log(doc)
         comment.update({
-            _id: req.body.replyId    
+            _id: req.body.replyTo   
         }, {
             $push:{
                 replyList: doc._id

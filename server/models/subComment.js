@@ -5,6 +5,7 @@ var subCommentSchema = new mongoose.Schema({
     content: {type: String, required: true},
     userName: {type: String, required: true},
     replyTo: {type: String, required: true},
+    email : {type: String, required: true},
     webSite: String
 })
 

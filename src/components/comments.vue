@@ -13,7 +13,7 @@
                     <span class="commentInfo-name">{{comment.userName}}</span>
                     <span class="commentInfo-time">{{comment.date | dateToCn}}</span>
                     <span class="commentInfo-floor right">#{{index + 1}}</span>
-                    <span class="commentInfo-reply right">回复</span>
+                    <span class="commentInfo-reply right" @click="replyOther(comment._id, comment.userName)">回复</span>
                 </p>
                 <p class="comment-cont">{{comment.content}}</p>
                 <sub-comment :sub-comments = "comment.replyList" v-if = "comment.replyList && comment.replyList.length"></sub-comment>
@@ -74,6 +74,7 @@ export default {
             comments : [
                 
             ],
+            commentId : '',
             newComment : {
                 articId :　this.articleId,
                 content : '',
@@ -82,7 +83,8 @@ export default {
                 webSite : ''
             },
             tip : '不能为空',
-            tipFlag : false
+            tipFlag : false,
+            replyReg : /\@.*\:/
         }
     },
     components: {
@@ -103,13 +105,31 @@ export default {
                 console.log(err);
             })
         },
+        isComment () {
+            console.log(this.newComment.content)
+            console.log(this.replyReg.test(this.newComment.content))
+            return !this.replyReg.test(this.newComment.content);
+        },
         submitComment () {
             var vm = this;
+            
+            //根据是否回复其他人来构造不同的请求对象
+            var commentBody = (function () {
+                var flag = vm.isComment();
+                var result = {};
+                for (var attr in vm.newComment) {
+                    if(!flag && attr == 'articId') {    
+                        result.replyTo = vm.commentId
+                    }
+                    result[attr] = vm.newComment[attr];
+                }
+                return result;
+            })();
             if (this.commentValidate()) {
                 this.$ajax({
                     method: 'post',
-                    url: vm.url.newUrl,
-                    data : vm.newComment
+                    url: vm.isComment() ? vm.url.newUrl : vm.url.newReplyUrl,
+                    data : commentBody
                 }).then(function(res){
                     if(res.data.result == "success") {
                         vm.newComment.userName = '';
@@ -121,7 +141,18 @@ export default {
                 .catch(function(err){
                     console.log(err);
                 })
-            } 
+            }
+            return false 
+        },
+        replyOther (id, name) {
+            console.log(id,name)
+            this.commentId = id;
+            if (this.replyReg.test(this.newComment.content)) {
+                this.newComment.content = this.newComment.content.replace(this.replyReg, '@' + name + ':')
+            }
+            else {
+                this.newComment.content = '@' + name + ':' + this.newComment.content;
+            }
         },
         showTip (text) {
             this.tip = text;
@@ -220,6 +251,7 @@ export default {
             width: 675px;
             height: 100px;
             padding: 10px;
+            font-size: 0.9rem;
         }
     }
     .btn-group {
