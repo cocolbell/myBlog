@@ -3,7 +3,7 @@
 > 这是一个为了实践学到的各种知识而搭建的博客，包括前端和后台开发，由于项目量较大，将会不定时进行更新
 
 ## 技术栈
-vue + express + mongoDB
+Vue + NodeJS + Express + MongoDB
 
 ## 设计目标
 ### 功能目标
@@ -21,8 +21,7 @@ vue + express + mongoDB
 - [x] 修改webpack默认设置，添加后台项目路径
 - [x] 使用SASS统一管理CSS
 - [ ] 使用VUE-SSR服务端渲染
-- [ ] 使用VUE路由懒加载，参考文档  http://www.jianshu.com/p/97f72141bd89
-- [ ] 使用VUE异步组件实现组件懒加载
+- [x] 利用webpack的代码分隔实现页面按需加载（路由懒加载）
 - [ ] 全局login组件
 - [ ] axios统一错误处理 
 - [ ] 使用VUEX（待定，看项目实际需求）
