@@ -7,21 +7,21 @@
 <script>
 import err from './../components/err.vue'
 export default {
-  name: 'interests',
-  data () {
-    return {
-      
+    name: 'interests',
+    data () {
+        return {
+            
+        }
+    },
+    components: {
+        err
+    },
+    methods : {
+        
+    },
+    created (){
+        
     }
-  },
-  components: {
-      err
-  },
-  methods : {
-     
-  },
-  created (){
-      
-  }
 }
 </script>
 

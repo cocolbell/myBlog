@@ -26,9 +26,6 @@ export default {
     methods : {
         
     },
-    created (){
-        
-    },
     computed : {
         articleId () {
             return this.$route.params.id

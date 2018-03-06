@@ -36,25 +36,25 @@
 <script>
 var marked = require("marked");
 export default {
-  name: 'articleEdit',
-  data () {
-    return {
-      articCont : "",
-      article : {
-          title : "",
-          tags : "",
-          contentPrev : "",
-          category : "",
-      }
-    }
-  },
-  components: {
-      
-  },
-  methods : {
-     submitArticle () {
-         var that = this;
-         if (this.article.title && this.article.contentPrev && this.article.category && this.articPrev && this.article.tags) {
+    name: 'articleEdit',
+    data () {
+        return {
+            articCont : "",
+            article : {
+                title : "",
+                tags : "",
+                contentPrev : "",
+                category : "",
+            }
+        }
+    },
+    components: {
+        
+    },
+    methods : {
+        submitArticle () {
+            var that = this;
+            if (this.article.title && this.article.contentPrev && this.article.category && this.articPrev && this.article.tags) {
             var dataTags = this.article.tags.split("/");
             this.$ajax({
                 method: 'post',
@@ -73,18 +73,18 @@ export default {
             .catch(function(err){
                 console.log(err)
             })
-         }
-         else console.log("请填写完整文章信息！");
-     }
-  },
-  created (){
-      
-  },
-  computed :{
-    articPrev: function(){
-        return marked(this.articCont);
+            }
+            else console.log("请填写完整文章信息！");
+        }
+    },
+    created (){
+        
+    },
+    computed :{
+        articPrev: function(){
+            return marked(this.articCont);
+        }
     }
-  }
 }
 </script>
 

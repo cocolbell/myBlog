@@ -18,7 +18,7 @@ name: 'app',
 		}
 	},
 	components: {
-		MyHeader,
+		MyHeader
 	}
 }
 </script>

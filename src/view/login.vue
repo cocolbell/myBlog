@@ -16,43 +16,43 @@
 
 <script>
 export default {
-  name: 'login',
-  data () {
-    return {
-        user : {
-            name : "",
-            password : ""
-        }
-    }
-  },
-  components: {
-      
-  },
-  methods : {
-     login () {
-         if (this.user.name && this.user.password) {
-            var loginName = this.user.name;
-            var loginPasw = this.user.password;
-            this.$ajax({
-                method: 'post',
-                url: '/api/login',
-                data: {
-                    name: loginName,
-                    password: loginPasw
-                }
-            }).then(function(res){
-                console.log(res)
-            })
-            .catch(function(err){
-                console.log(err)
-            })
-         }
-         else console.log("用户名或密码不能为空！");
-     }
-  },
-  created (){
-      
-  }
+	name: 'login',
+	data () {
+		return {
+			user : {
+				name : "",
+				password : ""
+			}
+		}
+	},
+	components: {
+		
+	},
+	methods : {
+		login () {
+			if (this.user.name && this.user.password) {
+			var loginName = this.user.name;
+			var loginPasw = this.user.password;
+			this.$ajax({
+				method: 'post',
+				url: '/api/login',
+				data: {
+					name: loginName,
+					password: loginPasw
+				}
+			}).then(function(res){
+				console.log(res)
+			})
+			.catch(function(err){
+				console.log(err)
+			})
+			}
+			else console.log("用户名或密码不能为空！");
+		}
+	},
+	created (){
+		
+	}
 }
 </script>
 

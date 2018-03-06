@@ -17,18 +17,18 @@
 
 <script>
 export default {
-  name: 'err',
-  data () {
-    return {
-      
+    name: 'err',
+    data () {
+        return {
+            
+        }
+    },
+    components: {
+        
+    },
+    methods : {
+        
     }
-  },
-  components: {
-      
-  },
-  methods : {
-     
-  }
 }
 </script>
 

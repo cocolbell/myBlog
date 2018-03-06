@@ -7,24 +7,24 @@
 <script>
 import comments from './../components/comments.vue'
 export default {
-  name: 'message',
-  data () {
-    return {
+    name: 'message',
+    data () {
+        return {
+            
+        }
+    },
+    components: {
+        comments
+    },
+    methods : {
         
+    },
+    created (){
+        
+    },
+    computed :{
+
     }
-  },
-  components: {
-      comments
-  },
-  methods : {
-     
-  },
-  created (){
-      
-  },
-  computed :{
-    
-  }
 }
 </script>
 
