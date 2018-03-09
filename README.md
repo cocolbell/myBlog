@@ -5,6 +5,8 @@
 ## 技术栈
 Vue + NodeJS + Express + MongoDB
 
+## 截图
+[![blogdbf29.md.png](https://miao.su/images/2018/03/09/blogdbf29.md.png)](https://miao.su/image/dedj5)
 ## 设计目标
 ### 功能目标
 - [x] 个人信息模块
