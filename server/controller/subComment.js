@@ -5,17 +5,15 @@ var mongoose = require('mongoose')
 module.exports.new = function (req,res) {
     var newSubComment = new SubComment(req.body);
     newSubComment.save().then(function (doc){
-        console.log(doc)
-        comment.update({
+        return comment.update({
             _id: req.body.replyTo   
         }, {
             $push:{
                 replyList: doc._id
             }
-        },function (err) {          
-            if(err) res.json({result: 'fail', reason: err});
-            else res.json({result: 'success', message: '发送评论成功'});        
         });
+    }).then(function() {
+        res.json({result: 'success', message: '发送评论成功'});
     }).catch(function (err) {
         console.log(err)
     });

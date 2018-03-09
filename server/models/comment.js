@@ -11,10 +11,10 @@ var commentSchema = new mongoose.Schema({
     replyList: [{ type: Schema.Types.ObjectId, ref: 'SubComment' }], 
 })
 
-commentSchema.statics.findByArtic = function (id , cb) {
-    this.find({"articId": id})
-    .populate('replyList')
-    .exec(cb);
+commentSchema.statics.findByArtic = function (id) {
+    return this.find({"articId": id})
+                .populate('replyList')
+                .exec();
 }
 
 module.exports = mongoose.model('Comment', commentSchema)

@@ -1,9 +1,9 @@
 var Comment = require('./../models/comment')
 var mongoose = require('mongoose')
 
-module.exports.new = function (req,res) {
+module.exports.new = function (req, res) {
     var newComment = new Comment(req.body);
-    newComment.save(function (err , product) {    
+    newComment.save(function (err, product) {    
         if (err) {
             res.json({result: 'fail', reason: err});
         }
@@ -13,13 +13,10 @@ module.exports.new = function (req,res) {
     });
 }
 
-module.exports.getByArtic = function (req,res) {
-    Comment.findByArtic(req.query.articId , function (err , docs){
-        if (err) {
-            res.json({result: 'fail', reason: err});
-        }
-        else {
-            res.json({result: 'success', message: docs});
-        }
+module.exports.getByArtic = function (req, res) {
+    Comment.findByArtic(req.query.articId).then(function(docs) {
+        res.json({result: 'success', message: docs})
+    }).catch(function(err) {
+        res.json({result: 'fail', reason: err});
     })
 }
