@@ -1,8 +1,6 @@
 var Article = require('./../models/article')
 var mongoose = require('mongoose')
 
-// var Promise = require("bluebird")
-// Promise.promisifyAll(Article);
 
 module.exports.new = function(req, res){   
     var defaultId = 1;
