@@ -3,12 +3,13 @@
         <div class="nav-wrapper clearfix">
             <p class="nav-logo">没有LOGO</p>
             <searchBar></searchBar>
-            <div class="nav-list">
-                <div class="nav-tab" 
-                    :class="{'nav-active' : activeIndex==index}" 
+            <div class="nav-list" @mouseleave = "switchTab(curIndex)">
+                <div class = "nav-tab" 
+                    :class = "{'nav-active' : activeIndex==index}" 
                     v-for = "(item,index) in navList" 
                     :key = "index" 
-                    @click = "switchTab(index)"
+                    @click = "switchTab(index);curIndex = index;"
+                    @mouseenter = "switchTab(index)"
                 >
                     <router-link :to="item.routerTo">{{item.text}}</router-link>
                 </div>
@@ -25,6 +26,7 @@ export default {
     data () {
         return {
             activeIndex:0,
+            curIndex:0,
             navList : [
                 {
                     routerTo:"/",
@@ -37,10 +39,6 @@ export default {
                 {
                     routerTo:"/archives",
                     text:"归档",
-                },
-                {
-                    routerTo:"/messages",
-                    text:"留言板",
                 },
                 {
                     routerTo:"/about",
@@ -118,11 +116,11 @@ export default {
             content:"";
             display:block;
             position:absolute;
-            bottom:15px;
+            bottom:0px;
             background-color:$decorateColor;
-            height:5px;
-            width:5px;
-            border-radius: 50%;
+            height:2px;
+            width: 50px;
+            margin: 0 15px;
             @include transition(0.3);
     }
 }

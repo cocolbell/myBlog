@@ -9,7 +9,7 @@
         </p>
         <a href="https://github.com/cocolbell" class="url">https://github.com/cocolbell</a>
         <div class="btn-group">
-            <div class="btn">订阅我</div>
+            <div class="btn">订阅</div>
         </div>
         <div class="websiteInfo">
             <ul class="clearfix">

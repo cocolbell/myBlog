@@ -15,7 +15,7 @@ const archives = r => require.ensure([], () => r(require('./../view/archives.vue
 const login = r => require.ensure([], () => r(require('./../view/login.vue')), 'login')
 const articleEdit = r => require.ensure([], () => r(require('./../view/articleEdit.vue')), 'articleEdit')
 const article = r => require.ensure([], () => r(require('./../view/article.vue')), 'article')
-const message = r => require.ensure([], () => r(require('./../view/message.vue')), 'message')
+// const message = r => require.ensure([], () => r(require('./../view/message.vue')), 'message')
 Vue.use(VueRouter)
 const router = new VueRouter({
   	routes: [{
@@ -31,10 +31,12 @@ const router = new VueRouter({
     },{
 		path: '/archives',
 		component: archives
-    },{
-		path: '/messages',
-		component: message
-    },{
+		}
+    // },{
+		// path: '/messages',
+		// component: message
+    // },{
+		,{
 		path: '/admin/login',
 		component: login
     },{
