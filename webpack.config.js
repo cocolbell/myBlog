@@ -77,7 +77,16 @@ if (process.env.NODE_ENV === 'production') {
                 // 指定范围是js文件来自node_modules
                 return (module.resource && /\.js$/.test(module.resource) &&(/node_modules/).test(module.resource));
             }
-        }),
+		}),
+		// This plugin must come after the vendor one (because webpack
+		// includes runtime into the last chunk)
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'runtime',
+			filename : 'runtime.js',
+			// minChunks: Infinity means that no app modules
+			// will be included into this chunk
+			minChunks: Infinity,
+		}),
 		new webpack.optimize.UglifyJsPlugin({
 			sourceMap: true,
 			compress: {

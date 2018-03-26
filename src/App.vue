@@ -3,7 +3,10 @@
     	<MyHeader></MyHeader>
       	<div class="content clearfix">
             <router-view></router-view>
-      	</div>  
+      	</div>
+		<div class="footer">
+			<div class="txt">© 2018 COCOLBELL. All Rights Reserved.</div>
+		</div>  
   	</div>
 </template>
 
@@ -55,12 +58,21 @@ name: 'app',
 		color:white;
 		background:$decorateColor; 
 	}
+	position: relative;
 }
 
 .content {
 	max-width:1200px;
 	margin:0 auto; 
 	padding: 40px 0;
+}
+
+.footer {
+	padding: 32px 0;
+	background-color:#353535;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
 }
 
 </style>
