@@ -6,8 +6,8 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, './dist'),
 		publicPath: '/dist/',
-		filename: 'main.js',
-		chunkFilename: '[name].[chunkhash].chunk.js'
+		filename: '[name].js',
+		chunkFilename: '[name].chunk.js',
 	},
 	module: {
 		rules: [
@@ -70,6 +70,14 @@ if (process.env.NODE_ENV === 'production') {
 				NODE_ENV: '"production"'
 			}
 		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor',
+			filename : 'vendor.js',
+            minChunks: function (module, count) {
+                // 指定范围是js文件来自node_modules
+                return (module.resource && /\.js$/.test(module.resource) &&(/node_modules/).test(module.resource));
+            }
+        }),
 		new webpack.optimize.UglifyJsPlugin({
 			sourceMap: true,
 			compress: {
