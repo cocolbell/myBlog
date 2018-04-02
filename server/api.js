@@ -11,6 +11,7 @@ var SubComment = require('./controller/subComment');
 
 // 登录接口
 router.post('/api/login', function(req, res){
+	console.log(req.body)
     if (req.body.name == admins[0].name && req.body.password == admins[0].password) {
         res.json({result: 'success', message: '登录成功'});
     }

@@ -13,8 +13,8 @@ module.exports.new = function (req,res) {
             }
         });
     }).then(function() {
-        res.json({result: 'success', message: '发送评论成功'});
+        res.fin('发送评论成功');
     }).catch(function (err) {
-        console.log(err)
+        res.err(err);
     });
 }

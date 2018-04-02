@@ -13,19 +13,19 @@ module.exports.new = function(req, res){
     }).then(function(articleEntity){
         return articleEntity.save();
     }).then(function(){
-        res.json({result: 'success', message: '发布文章成功'});
+        res.fin("发布文章成功");
     }).catch(function(err){
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     });
 }
 
 module.exports.findAll = function(req, res){
     Article.find(function(err, data){
         if (err) {
-            res.json({result: 'fail', reason: err});
+            res.err(err);
         }
         else {
-            res.json({result: 'success', message: data});
+            res.fin(data);
         }
     })  
 }
@@ -43,17 +43,17 @@ module.exports.findById = function(req, res){
             content : docs,
             context : context
         }
-        res.json({result: 'success', message: results});
+        res.fin(results);
     }).catch(function(err) {
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     })
 }
 
 module.exports.findByPage = function(req, res){
     Article.findByPage(req.query.page).then(function(docs) {
-        res.json({result: 'success', message: docs});
+        res.fin(docs);
     }).catch(function(err) {
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     })
 }
 
@@ -61,10 +61,10 @@ module.exports.getPageNum = function(req, res){
     Article.find(function(err, docs){
         var num = parseInt(docs.length/4);
         if (err) {
-            res.json({result: 'fail', reason: err});
+            res.err(err);
         }
         else {
-            res.json({result: 'success', message: num});
+            res.fin(num);
         }
     })  
 }
@@ -76,9 +76,9 @@ module.exports.findAllTags = function(req, res){
             tags = tags.concat(element.tags)  //数组拼接
         });
         tags = Array.from(new Set(tags)) //数组去重
-        res.json({result: 'success', message: tags});
+        res.fin(tags);
     }).catch(function(err) {
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     })
 }
 
@@ -89,32 +89,32 @@ module.exports.findAllCategory = function(req, res){
             category.push(element.category)  //数组拼接
         });
         category = Array.from(new Set(category)) //数组去重
-        res.json({result: 'success', message: category});
+        res.fin(category);
     }).catch(function(err) {
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     });
 }
 
 module.exports.findByTag = function(req, res){
     Article.findByTag(req.query.tagName).then(function(docs) {
-        res.json({result: 'success', message: docs});
+        res.fin(docs);
     }).catch(function(err) {
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     });
 }
 
 module.exports.findByCate = function(req, res){
     Article.findByCate(req.query.cateName).then(function(docs) {
-        res.json({result: 'success', message: docs});
+        res.fin(docs);
     }).catch(function(err) {
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     });
 }
 
 module.exports.findByMonth = function(req, res){
     Article.findByMonth(req.query.year,req.query.month).then(function(docs) {
-        res.json({result: 'success', message: docs});
+        res.fin(docs);
     }).catch(function(err) {
-        res.json({result: 'fail', reason: err});
+        res.err(err);
     });
 }

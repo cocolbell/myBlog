@@ -13,6 +13,9 @@ var bodyParser = require('body-parser')
 var api = require('./server/api')
 
 var mongoose = require('mongoose')
+
+var iRes = require('./server/utils/http-return')
+
 var option = {
     useMongoClient:true,
     server: {
@@ -33,9 +36,11 @@ var option = {
 mongoose.Promise = require('bluebird');
 
 var app = express();
-
+app.use(iRes.httpReturn);
 app.use(bodyParser.json());
 app.use(api);
+
+
 app.use('/dist', express.static(path.resolve('./dist'),{ maxAge: 60*60*24}));
 
 
