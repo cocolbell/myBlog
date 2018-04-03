@@ -24,15 +24,14 @@ Vue + NodeJS + Express + MongoDB
 - [x] 使用SASS统一管理CSS
 - [ ] 使用VUE-SSR服务端渲染
 - [x] 利用webpack的代码分割实现页面按需加载（路由懒加载）
-- [ ] 全局login组件
 - [ ] axios统一错误处理 
 - [ ] 使用VUEX（待定，看项目实际需求）
 
 #### 后台方面
 - [x] 使用promise进行异步流程控制
-- [x] 利用中间件封装http response 的方法，方便控制服务端返回值
+- [x] 利用中间件封装http response 的方法，方便统一服务端返回值格式
+- [x] 利用中间件封装token相关方法，实现利用token保持登录状态和权限过滤
 - [ ] 使用async/await进行异步流程控制
-- [ ] 使用session保存用户登录状态并作用户权限过滤
 - [ ] node发送邮件，订阅后不定时推送信息
 - [ ] 数据库备份
 
@@ -43,12 +42,13 @@ Vue + NodeJS + Express + MongoDB
 │   ├── controller                              // 逻辑处理层
 │   ├── models                                  // 数据表结构层
 │   ├── api.js                                  // 服务端的API接口
+│   ├── utils                                   // 自定义中间件
 ├── src                                         // 客户端代码
 │   ├── assets                                  // 公共资源
 │   ├── components                              // 组件           
 │   ├── global                                  // 全局方法和样式
-│   ├── router                                  // 路由控制
-│   ├── view                                    // 引用的插件
+│   ├── router                                  // 路由
+│   ├── view                                    // 路由页面
 │   ├── App.vue                                 // 页面入口文件
 │   ├── main.js                                 // 程序入口文件
 ├── index.html                                  // 入口html文件
