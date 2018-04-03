@@ -19,7 +19,11 @@ module.exports.new = function(req, res){
     });
 }
 
-module.exports.findAll = function(req, res){
+module.exports.delete = function () {
+
+}
+
+module.exports.findAll = function (req, res) {
     Article.find(function(err, data){
         if (err) {
             res.err(err);
@@ -30,7 +34,7 @@ module.exports.findAll = function(req, res){
     })  
 }
 
-module.exports.findById = function(req, res){
+module.exports.findById = function (req, res) {
     Article.find({"articId":req.query.id}).then(function(docs) {
         var prev = Article.find({'articId' :{ "$lt" : req.query.id} }).sort({'articId':-1}).limit(1);
         var next = Article.find({'articId' :{ "$gt" : req.query.id} }).sort({'articId':-1}).limit(1);      
@@ -49,7 +53,7 @@ module.exports.findById = function(req, res){
     })
 }
 
-module.exports.findByPage = function(req, res){
+module.exports.findByPage = function (req, res) {
     Article.findByPage(req.query.page).then(function(docs) {
         res.fin(docs);
     }).catch(function(err) {
@@ -57,7 +61,7 @@ module.exports.findByPage = function(req, res){
     })
 }
 
-module.exports.getPageNum = function(req, res){
+module.exports.getPageNum = function (req, res) {
     Article.find(function(err, docs){
         var num = parseInt(docs.length/4);
         if (err) {
@@ -69,7 +73,7 @@ module.exports.getPageNum = function(req, res){
     })  
 }
 
-module.exports.findAllTags = function(req, res){
+module.exports.findAllTags = function (req, res) {
     Article.findAllFileds('tags').then(function(docs) {
         var tags = new Array();
         docs.forEach(function(element) {
@@ -82,7 +86,7 @@ module.exports.findAllTags = function(req, res){
     })
 }
 
-module.exports.findAllCategory = function(req, res){
+module.exports.findAllCategory = function (req, res) {
     Article.findAllFileds('category').then(function(docs) {
         var category = new Array();
         docs.forEach(function(element) {
@@ -95,7 +99,7 @@ module.exports.findAllCategory = function(req, res){
     });
 }
 
-module.exports.findByTag = function(req, res){
+module.exports.findByTag = function (req, res) {
     Article.findByTag(req.query.tagName).then(function(docs) {
         res.fin(docs);
     }).catch(function(err) {
@@ -103,7 +107,7 @@ module.exports.findByTag = function(req, res){
     });
 }
 
-module.exports.findByCate = function(req, res){
+module.exports.findByCate = function (req, res) {
     Article.findByCate(req.query.cateName).then(function(docs) {
         res.fin(docs);
     }).catch(function(err) {
@@ -111,8 +115,8 @@ module.exports.findByCate = function(req, res){
     });
 }
 
-module.exports.findByMonth = function(req, res){
-    Article.findByMonth(req.query.year,req.query.month).then(function(docs) {
+module.exports.findByMonth = function (req, res) {
+    Article.findByMonth(req.query.year, req.query.month).then(function(docs) {
         res.fin(docs);
     }).catch(function(err) {
         res.err(err);

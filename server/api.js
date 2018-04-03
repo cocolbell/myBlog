@@ -1,11 +1,13 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
+var authorize = require('./utils/auth').auth
+var token = require('./utils/token')
 
 //引入默认管理员
-var admins = require('./admin').admins;
-var Article = require('./controller/article');
-var Comment = require('./controller/comment');
-var SubComment = require('./controller/subComment');
+var admins = require('./admin').admins
+var Article = require('./controller/article')
+var Comment = require('./controller/comment')
+var SubComment = require('./controller/subComment')
 
 
 
@@ -13,21 +15,21 @@ var SubComment = require('./controller/subComment');
 router.post('/api/login', function(req, res){
 	console.log(req.body)
     if (req.body.name == admins[0].name && req.body.password == admins[0].password) {
-        res.json({result: 'success', message: '登录成功'});
+        res.fin(token.create());
     }
     else {
-        res.json({result: 'fail', reason: '用户名或密码错误'});
+        res.err('用户名或密码错误');
     }
 })
 
 
 
 // 文章相关接口
-router.post('/api/article/new', Article.new)
+router.post('/api/article/new', authorize, Article.new)
 
 router.get('/api/article/getAllArticles', Article.findAll)
 
-router.get('/api/article/getArticlesById', Article.findById)
+router.get('/api/article/getById', Article.findById)
 
 router.get('/api/article/getPageNum', Article.getPageNum)
 

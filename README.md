@@ -30,6 +30,7 @@ Vue + NodeJS + Express + MongoDB
 
 #### 后台方面
 - [x] 使用promise进行异步流程控制
+- [x] 利用中间件封装http response 的方法，方便控制服务端返回值
 - [ ] 使用async/await进行异步流程控制
 - [ ] 使用session保存用户登录状态并作用户权限过滤
 - [ ] node发送邮件，订阅后不定时推送信息

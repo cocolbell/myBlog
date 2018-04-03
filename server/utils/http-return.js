@@ -4,8 +4,9 @@ function _successJson (doc) {
         message : doc
     }
 }
-function _errJson (text) {
+function _errJson (text, code) {
     return {
+        errCode : code || 1,
         result : 'fail',
         reason : text
     }
@@ -14,8 +15,8 @@ module.exports.httpReturn = function (req, res, next) {
     res.fin = function (doc) {
         res.json(_successJson(doc));
     }
-    res.err = function (text) {
-        res.json(_errJson(text));
+    res.err = function (text, code) {
+        res.json(_errJson(text, code));
     }
     next();
 }

@@ -14,6 +14,7 @@ var api = require('./server/api')
 
 var mongoose = require('mongoose')
 
+//引入对res的拓展方法
 var iRes = require('./server/utils/http-return')
 
 var option = {

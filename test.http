@@ -1,3 +1,20 @@
-http://localhost:7000/api/article/getAllArticles
+POST http://localhost:7000/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "name": "cocolbell",
+    "password": "123456"
+}
+
+###
+GET http://localhost:7000/api/article/getAllArticles HTTP/1.1
 
 
+###
+POST http://localhost:7000/api/article/new HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
