@@ -19,7 +19,13 @@ articleSchema.statics.findLast = function () {
 	return this.findOne()
 				.sort({'articId':-1})
 				.exec();
-	}
+}
+
+articleSchema.statics.editById = function (id, updates) {
+	return this.find({'articId': id})
+				.update(updates)
+				.exec();
+}
 
 articleSchema.statics.findByPage = function (page) {
 	page -= 1;

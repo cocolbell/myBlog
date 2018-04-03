@@ -19,8 +19,20 @@ module.exports.new = function(req, res){
     });
 }
 
-module.exports.delete = function () {
+module.exports.delete = function (req, res) {
+    Article.remove({"articId":req.body.id}, function (err) {
+        err ? res.err(err) : res.fin('删除文章成功')
+    })
+}
 
+module.exports.edit = function (req, res) {
+    var updates = req.body.updates;
+    Article.editById(req.body.id, updates)
+        .then(function (doc) {
+            res.fin('更新文档成功')
+        }).catch(function (err) {
+            res.err(err)
+        })
 }
 
 module.exports.findAll = function (req, res) {
@@ -35,7 +47,8 @@ module.exports.findAll = function (req, res) {
 }
 
 module.exports.findById = function (req, res) {
-    Article.find({"articId":req.query.id}).then(function(docs) {
+    Article.find({"articId":req.query.id})
+    .then(function(docs) {
         var prev = Article.find({'articId' :{ "$lt" : req.query.id} }).sort({'articId':-1}).limit(1);
         var next = Article.find({'articId' :{ "$gt" : req.query.id} }).sort({'articId':-1}).limit(1);      
         return Promise.all([prev , next]);

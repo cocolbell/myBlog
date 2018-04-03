@@ -31,6 +31,10 @@ router.get('/api/article/getAllArticles', Article.findAll)
 
 router.get('/api/article/getById', Article.findById)
 
+router.post('/api/article/edit', authorize, Article.edit)
+
+router.post('/api/article/delete', authorize, Article.delete)
+
 router.get('/api/article/getPageNum', Article.getPageNum)
 
 router.get('/api/article/getByPage', Article.findByPage)

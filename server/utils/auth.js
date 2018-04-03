@@ -2,7 +2,7 @@ var token = require('./token')
 
 module.exports.auth = function (req, res, next) {   
     if(req.body && req.body.auth) {
-        var auth = res.body.auth;
+        var auth = req.body.auth;
         if(token.checkToken(auth)) {
             next();
         }else res.err('unauthorized!', 0)

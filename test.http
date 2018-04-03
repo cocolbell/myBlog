@@ -18,3 +18,25 @@ content-type: application/json
     "name": "sample",
     "time": "Wed, 21 Oct 2015 18:27:50 GMT"
 }
+
+###
+POST http://localhost:7000/api/article/edit HTTP/1.1
+content-type: application/json
+
+{
+    "id": "4",
+    "auth": "eyJkYXRhIjp7ImlzcyI6Imp1c3RtYW5nby5jbiJ9LCJjcmVhdGVkIjoxNTIyNzQ4NDE5LCJleHAiOjE4MDB9.fzPKL41XaXmqWqPtK80CznQzwahqTh2OHZ7NBrXL4QQ=",
+    "updates": {
+        "title":555
+    }
+}
+
+
+###
+POST http://localhost:7000/api/article/delete HTTP/1.1
+content-type: application/json
+
+{
+    "id": "4",
+    "auth": "eyJkYXRhIjp7ImlzcyI6Imp1c3RtYW5nby5jbiJ9LCJjcmVhdGVkIjoxNTIyNzUxNDkxLCJleHAiOjE4MDB9.g8NIbYOkpuID7l6tzIQoo+4O7JSmvwTeDKljNeaGxUc=" 
+}
