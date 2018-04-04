@@ -9,7 +9,7 @@
 import articleCont from './../components/articleCont.vue'
 import comments from './../components/comments.vue'
 export default {
-    name: 'article',
+    name: 'arti',
     data () {
         return {
             commentUrl : {

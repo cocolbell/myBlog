@@ -47,20 +47,22 @@ module.exports.findAll = function (req, res) {
 }
 
 module.exports.findById = function (req, res) {
+    var artic = null;
     Article.find({"articId":req.query.id})
-    .then(function(docs) {
+    .then(function(doc) {
+        artic = doc;
         var prev = Article.find({'articId' :{ "$lt" : req.query.id} }).sort({'articId':-1}).limit(1);
-        var next = Article.find({'articId' :{ "$gt" : req.query.id} }).sort({'articId':-1}).limit(1);      
+        var next = Article.find({'articId' :{ "$gt" : req.query.id} }).sort({'articId':1}).limit(1);      
         return Promise.all([prev , next]);
     }).then(function(results) {
         var context = new Array();
         context.push(results[0][0]);
         context.push(results[1][0]);
-        var results = {
-            content : docs,
+        var docs = {
+            content : artic,
             context : context
         }
-        res.fin(results);
+        res.fin(docs);
     }).catch(function(err) {
         res.err(err);
     })

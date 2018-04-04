@@ -42,8 +42,8 @@ app.use(bodyParser.json());
 app.use(api);
 
 
-app.use('/dist', express.static(path.resolve('./dist'),{ maxAge: 60*60*24}));
-
+app.use('/dist', express.static(path.resolve('./dist')));
+app.set('etag', false);
 
 
 // 博客首页

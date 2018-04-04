@@ -18,17 +18,18 @@ const interests = r => System.import(/* webpackChunkName: "interests" */'./../vi
 const archives = r => System.import(/* webpackChunkName: "archives" */'./../view/archives.vue');
 const login = r => System.import(/* webpackChunkName: "login" */'./../view/login.vue');
 const articleEdit = r => System.import(/* webpackChunkName: "articleEdit" */'./../view/articleEdit.vue');
-const article = r => System.import(/* webpackChunkName: "article" */'./../view/article.vue');
+const artic = r => System.import(/* webpackChunkName: "article" */'./../view/artic.vue');
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  	routes: [{
+	mode: 'history',  
+	routes: [{
     path: '/',
     component: index
     },{
 		name:'articles',
 		path: '/articles/:id',
-		component: article
+		component: artic
     },{
 		path: '/interests',
 		component: interests

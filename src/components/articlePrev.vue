@@ -1,7 +1,8 @@
 <template>
     <div class="articlePrev">
         <p class="articP-title"><router-link :to = "'articles/' + article.articId ">{{article.title}}</router-link></p>
-        <p class="articP-head"><span class="articP-cate">{{article.category}}</span><span class="articP-time">发布于2017年7月3日</span></p>
+        <!-- <p class="articP-head"><span class="articP-cate">{{article.category}}</span><span class="articP-time">发布于2017年7月3日</span></p> -->
+        <p class="articP-head"><span class="articP-cate">文章</span><span class="articP-time">发布于2017年7月3日</span></p>
         <p class="articP-cont">
             {{article.contentPrev}}
             <span class="articP-href"><router-link :to = "'articles/' + article.articId ">阅读全文 »</router-link></span>
@@ -61,7 +62,7 @@ export default {
     .articP-cate{
         font-size: 0.8rem;
         margin-right: 15px; 
-        cursor: pointer;
+        // cursor: pointer;
     }
     .articP-time{
         font-size: 0.8rem;
@@ -77,7 +78,7 @@ export default {
         cursor: pointer;
     }
     .articP-href:hover {
-        text-decoration: underline;
+        border-bottom: 1px solid $decorateColor
     }
 }
 .articP-foot {

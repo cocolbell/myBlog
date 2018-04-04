@@ -50,7 +50,7 @@ export default {
             var self = this;
             this.$ajax({
                 method: 'get',
-                url: '/api/article/getArticlesById?id=' + self.articleId,
+                url: '/api/article/getById?id=' + self.articleId,
             }).then(function(res){
                 if(res.data.result == "success") {
                     self.articleData = res.data.message.content[0];

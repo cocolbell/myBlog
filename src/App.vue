@@ -42,7 +42,6 @@ name: 'app',
 	text-align: center;
 	color: $fontColor ;
 	background-color: $bgColor;
-	min-height: 1000px;
 	// font-weight: 300 ;
 	font-size:14px;
 	margin-top: 66px;
@@ -58,21 +57,20 @@ name: 'app',
 		color:white;
 		background:$decorateColor; 
 	}
-	position: relative;
 }
 
 .content {
 	max-width:1200px;
 	margin:0 auto; 
 	padding: 40px 0;
+	min-height: 730px;
+	
 }
 
 .footer {
 	padding: 32px 0;
 	background-color:#353535;
 	width: 100%;
-	position: absolute;
-	bottom: 0;
 }
 
 </style>
