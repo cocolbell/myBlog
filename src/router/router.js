@@ -16,38 +16,32 @@ import index from './../view/index.vue'
 
 const interests = r => System.import(/* webpackChunkName: "interests" */'./../view/interests.vue');
 const archives = r => System.import(/* webpackChunkName: "archives" */'./../view/archives.vue');
-const login = r => System.import(/* webpackChunkName: "login" */'./../view/login.vue');
 const articleEdit = r => System.import(/* webpackChunkName: "articleEdit" */'./../view/articleEdit.vue');
 const artic = r => System.import(/* webpackChunkName: "article" */'./../view/artic.vue');
+const about = r => System.import(/* webpackChunkName: "about" */'./../view/about.vue');
 Vue.use(VueRouter)
 
 const router = new VueRouter({
 	mode: 'history',  
-	routes: [{
-    path: '/',
-    component: index
-    },{
-		name:'articles',
-		path: '/articles/:id',
-		component: artic
-    },{
-		path: '/interests',
-		component: interests
-    },{
-		path: '/archives',
-		component: archives
+	routes: [
+		{
+			path: '/',
+			component: index
+		},{
+			name:'articles',
+			path: '/articles/:id',
+			component: artic
+		},{
+			path: '/interests',
+			component: interests
+		},{
+			path: '/archives',
+			component: archives
+		},{
+			path: '/about',
+			component: about
 		}
-    // },{
-		// path: '/messages',
-		// component: message
-    // },{
-		,{
-		path: '/admin/login',
-		component: login
-    },{
-		path: '/admin/articleEdit',
-		component: articleEdit
-    }]
+	]
 })
 
 export default router

@@ -31,6 +31,8 @@ router.get('/api/article/getAllArticles', Article.findAll)
 
 router.get('/api/article/getById', Article.findById)
 
+router.get('/api/article/like', Article.likeAdd)
+
 router.post('/api/article/edit', authorize, Article.edit)
 
 router.post('/api/article/delete', authorize, Article.delete)

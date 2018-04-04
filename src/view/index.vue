@@ -75,7 +75,8 @@ export default {
 
 <style lang="scss">
 .right-cont{
-  float: right;
+    float: right;
+    
 }
 
 

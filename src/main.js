@@ -17,6 +17,8 @@ Vue.filter('dateToCn', function (value) {
     return _Global.toCn(value);
 })
 
+import './assets/iconfont'
+
 new Vue({
 	el: '#app',
 	router,

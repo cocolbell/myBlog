@@ -7,10 +7,12 @@
         </div>
         <div class="article-foot">
             <div class="article-tags">
-                <span class="article-tag" v-for = "(tag , index) in articleData.tags">#{{tag}}<i>[3]</i></span>
+                <span class="article-tag" :key='index' v-for = "(tag , index) in articleData.tags">#{{tag}}<i>[3]</i></span>
             </div>
             <div class="article-func">
-
+                <svg class="icon" :class = "{'icon-active' : liked}" @click="likeAdd" aria-hidden="true">
+                    <use xlink:href="#icon-dianzan"></use>
+                </svg>
             </div>
             <div class="article-nav clearfix">
                 <div class="article-navL left text-left">
@@ -42,22 +44,23 @@ export default {
                 next : {articId:0}
             },
             prevId : 0,
-            nextId : 0
+            nextId : 0,
+            liked : false
         }
     },
     methods : {
         getCont () {
-            var self = this;
+            var _this = this;
             this.$ajax({
                 method: 'get',
-                url: '/api/article/getById?id=' + self.articleId,
+                url: '/api/article/getById?id=' + _this.articleId,
             }).then(function(res){
                 if(res.data.result == "success") {
-                    self.articleData = res.data.message.content[0];
-                    self.articContext.prev= res.data.message.context[1];
-                    self.articContext.next = res.data.message.context[0];
-                    self.prevId = self.articContext.prev?self.articContext.prev.articId : 0;
-                    self.nextId = self.articContext.next?self.articContext.next.articId : 0
+                    _this.articleData = res.data.message.content[0];
+                    _this.articContext.prev= res.data.message.context[1];
+                    _this.articContext.next = res.data.message.context[0];
+                    _this.prevId = _this.articContext.prev?_this.articContext.prev.articId : 0;
+                    _this.nextId = _this.articContext.next?_this.articContext.next.articId : 0
                 }
             })
             .catch(function(err){
@@ -69,6 +72,20 @@ export default {
                 this.$router.push(id.toString())
             }   
             else return false
+        },
+        likeAdd () {
+            var _this = this;
+            this.$ajax({
+                method: 'get',
+                url: '/api/article/like?id=' + _this.articleId,
+            }).then(function(res){
+                if(res.data.result == "success") {
+                    _this.liked = true;
+                }
+            })
+            .catch(function(err){
+                console.log(err);
+            })
         }
     },
     watch: {
@@ -109,6 +126,24 @@ export default {
     .article-body{
         text-align: left;
         padding: 60px 0;
+    }
+    .article-func {
+        font-size: 2.5rem;
+        .icon-active {
+            color: $decorateColor;
+        }
+        svg {
+            cursor: pointer;
+            transition: all 0.3s;
+            path {
+                fill: $decorateColor;
+            }
+            &:hover {
+                font-size: 3rem;
+                color: $decorateColor;
+            }
+        }
+        
     }
     .article-tags {
         text-align: left;

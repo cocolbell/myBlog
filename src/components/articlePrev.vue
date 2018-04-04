@@ -13,11 +13,11 @@
                 <span class="articP-tags" v-for="(tag , index) in article.tags" :key="index">#{{tag}}</span>
             </div>
             <div class="articP-footR">
-                <span>17 喜欢</span>
+                <span>{{article.likeNum}} 喜欢</span>
                 <span>/</span>
                 <span>18 回复</span>
                 <span>/</span>
-                <span>150 浏览</span>
+                <span>{{article.viewNum}} 浏览</span>
             </div>
         </div>
     </div>
