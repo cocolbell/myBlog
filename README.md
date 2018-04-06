@@ -30,7 +30,6 @@ Vue + NodeJS + Express + MongoDB
 - [x] 使用promise进行异步流程控制
 - [x] 利用中间件封装http response 的方法，方便统一服务端返回值格式
 - [x] 利用中间件封装token相关方法，实现利用token保持登录状态和权限过滤
-- [ ] 使用async/await进行异步流程控制
 - [ ] node发送邮件，订阅后不定时推送信息
 - [ ] 数据库备份
 
