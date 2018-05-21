@@ -1,11 +1,11 @@
 <template>
     <div class="articlePrev">
-        <p class="articP-title"><router-link :to = "'articles/' + article.articId ">{{article.title}}</router-link></p>
+        <p class="articP-title"><router-link :to="{ path: '/articles/' + article.articId}">{{article.title}}</router-link></p>
         <!-- <p class="articP-head"><span class="articP-cate">{{article.category}}</span><span class="articP-time">发布于2017年7月3日</span></p> -->
         <p class="articP-head"><span class="articP-cate">文章</span><span class="articP-time">发布于2017年7月3日</span></p>
         <p class="articP-cont">
             {{article.contentPrev}}
-            <span class="articP-href"><router-link :to = "'articles/' + article.articId ">阅读全文 »</router-link></span>
+            <span class="articP-href"><router-link :to="{ path: '/articles/' + article.articId}">阅读全文 »</router-link></span>
         </p>
         <div class="articP-foot clearfix">
             <div class="articP-footL">

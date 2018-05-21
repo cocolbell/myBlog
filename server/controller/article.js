@@ -98,7 +98,7 @@ module.exports.findByPage = function (req, res) {
 
 module.exports.getPageNum = function (req, res) {
     Article.find(function(err, docs){
-        var num = parseInt(docs.length/4);
+        var num = Math.ceil(docs.length/4);
         if (err) {
             res.err(err);
         }
@@ -135,7 +135,9 @@ module.exports.findAllCategory = function (req, res) {
 }
 
 module.exports.findByTag = function (req, res) {
+    console.log(req.query.tagName)
     Article.findByTag(req.query.tagName).then(function(docs) {
+        console.log(docs)
         res.fin(docs);
     }).catch(function(err) {
         res.err(err);

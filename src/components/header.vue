@@ -56,7 +56,7 @@ export default {
         }
     },
     mounted () {
-        
+        var route = this.$route;
     },
     computed : {
         XLeft : function() {

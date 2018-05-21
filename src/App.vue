@@ -2,7 +2,9 @@
  	<div id="app">
     	<MyHeader></MyHeader>
       	<div class="content clearfix">
-            <router-view></router-view>
+			<transition name="fade">
+            	<router-view></router-view>
+			</transition>
       	</div>
 		<div class="footer">
 			<div class="txt">© 2018 COCOLBELL. All Rights Reserved.</div>
@@ -79,5 +81,11 @@ name: 'app',
    fill: currentColor;
    overflow: hidden;
 }
-
+.fade-enter-active {
+    transition: all .7s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+}
 </style>

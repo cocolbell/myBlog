@@ -19,11 +19,8 @@ export default {
     methods : {
         
     },
-    created (){
+    created () {
         
-    },
-    computed :{
-
     }
 }
 </script>

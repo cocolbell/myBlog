@@ -35,7 +35,8 @@ export default {
 <style lang="scss">
 @import "./../global/vars.scss";
 .selfIntro{
-    float: left;
+    // float: left;
+    position: fixed;
     width:324px;
     height:600px;
     background-color:white ;

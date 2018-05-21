@@ -25,7 +25,7 @@ function padLeftZero (str) {
 
 function toCn (date) {
     var cnFmt = ['年','月','日']
-    var fmtDate = format(date,'yyyy-M-d');
+    var fmtDate = format(date,'yyyy-mm-dd');
     fmtDate = fmtDate.split('-');
     var cnDate = '';
     fmtDate.forEach(function (ele,i){

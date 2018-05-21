@@ -6,7 +6,7 @@
                 class="page-item" 
                 v-for="(item , index) in pageArr" 
                 :key='index'
-                @click="jump(item)"
+                @click="jump(item);$emit('jumpPage',item)"
                 :class="{'active': pageCur == item}">
                 {{item}}
             </li>
@@ -21,13 +21,13 @@ export default {
     props : ['pageCount','pageCurrent'],
     data () {
         return {
-            pageArr: 1,
+            pageArr: [1],
             numOverflow : {
                 prevMore : false,
                 nextMore : false
             },
             maxNum : 3,
-            pageCur : 1
+            pageCur: this.pageCurrent
         }
     },
     methods : {
@@ -81,16 +81,17 @@ export default {
                     res.push(i)
                 }
             }
-            return res
+            return res;
         }
     },
-    created () {
-        this.pageCur = this.pageCurrent;        
-        this.init();
+    mounted () {
+        this.init();        
     },
-    computed : {
-        
-    }
+    watch: {
+        pageCount: function () {
+            this.init();
+        }
+    },  
 }
 </script>
 

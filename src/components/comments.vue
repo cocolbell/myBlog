@@ -92,13 +92,13 @@ export default {
     },
     methods : {
         getComment () {
-            var vm = this;
+            var _this = this;
             this.$ajax({
                 method: 'get',
-                url: vm.url.getUrl + vm.articleId,
+                url: _this.url.getUrl + _this.articleId,
             }).then(function(res){
                 if(res.data.result == "success") {
-                    vm.comments = res.data.message;
+                    _this.comments = res.data.message;
                 }
             })
             .catch(function(err){
@@ -106,36 +106,33 @@ export default {
             })
         },
         isComment () {
-            console.log(this.newComment.content)
-            console.log(this.replyReg.test(this.newComment.content))
             return !this.replyReg.test(this.newComment.content);
         },
         submitComment () {
-            var vm = this;
+            var _this = this;
             
             //根据是否回复其他人来构造不同的请求对象
             var commentBody = (function () {
-                var flag = vm.isComment();
+                var flag = _this.isComment();
                 var result = {};
-                for (var attr in vm.newComment) {
+                for (var attr in _this.newComment) {
                     if(!flag && attr == 'articId') {    
-                        result.replyTo = vm.commentId
+                        result.replyTo = _this.commentId
                     }
-                    result[attr] = vm.newComment[attr];
+                    result[attr] = _this.newComment[attr];
                 }
                 return result;
             })();
             if (this.commentValidate()) {
                 this.$ajax({
                     method: 'post',
-                    url: vm.isComment() ? vm.url.newUrl : vm.url.newReplyUrl,
+                    url: _this.isComment() ? _this.url.newUrl : _this.url.newReplyUrl,
                     data : commentBody
                 }).then(function(res){
                     if(res.data.result == "success") {
-                        vm.newComment.userName = '';
-                        vm.newComment.content = '';
-                        vm.newComment.email = '';
-                        vm.getComment();
+                        _this.newComment.content = '';
+                        _this.getComment();
+                        _this.setUser(_this.newComment.userName, _this.newComment.email, _this.newComment.webSite);
                     }
                 })
                 .catch(function(err){
@@ -145,7 +142,6 @@ export default {
             return false 
         },
         replyOther (id, name) {
-            console.log(id,name)
             this.commentId = id;
             if (this.replyReg.test(this.newComment.content)) {
                 this.newComment.content = this.newComment.content.replace(this.replyReg, '@' + name + ':')
@@ -174,14 +170,33 @@ export default {
         },
         commentLeave () {
 
+        },
+        setUser (name, email, webSite) {
+            var user = {
+                name : name,
+                email : email,
+                webSite : webSite
+            };
+            var userJson = JSON.stringify(user);
+            localStorage.setItem('user', userJson);
+        },
+        haveUser () {
+            var userData = localStorage.getItem('user');
+            var user = JSON.parse(userData);
+            this.newComment.userName = user.name;
+            this.newComment.email = user.email;
+            user.webSite && (this.newComment.webSite = user.webSite);
         }
     },
     watch: {
         // 如果路由有变化，会再次执行该方法
         '$route': 'getComment'
     },
-    created (){
+    created () {
         this.getComment();
+    },
+    mounted () {
+        this.haveUser();
     }
 }
 </script>

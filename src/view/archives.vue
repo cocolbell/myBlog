@@ -7,46 +7,80 @@
 				<span v-for="(item, index) in archiveItems" 
 					:key='index'
 					:class="{'tag-active': activeIndex == index}"
-					@click = "activeIndex = index">
+					@click="tagHandle(index, item)">
 					{{item}}
 				</span>
 			</div>
-			<div class="search-item">
-				<p><span class="sign">#</span>2017年 04月（4篇文章）</p>
-				<ul>
-					<li>04日<span class="search-title">搭建一个简单的node服务器</span></li>
-					<li>04日<span class="search-title">搭建一个简单的nodaasdassde服务器</span></li>
-					<li>05日<span class="search-title">搭建一个简单的node服务器</span></li>
-					<li>10日<span class="search-title">搭建一个简单的node服务器</span></li>
-				</ul>
-				<p><span class="sign">#</span>2017年 02月（4篇文章）</p>
-				<ul>
-					<li>04日<span class="search-title">搭建一个简单的node服务器</span></li>
-					<li>04日<span class="search-title">搭建一个简单的noasdasde服务器</span></li>
-					<li>05日<span class="search-title">搭建一个简单的node服务器</span></li>
-					<li>10日<span class="search-title">搭建一个asdasddssd简单的node服务器</span></li>
-				</ul>
-			</div>
+			<searchRender :artic-list="searchRes"></searchRender>
 		</div>
     </div>
 </template>
 
 <script>
+import searchRender from './../components/searchRender.vue'
 export default {
 	name: 'archive',
 	data () {
 		return {
-			searchRes : [
-				{
-
-				}
-			],
-			archiveItems : ['全部','Web缓存','ES6','Javascript','Web缓存','ES6','Javascript','Web缓存','ES6','Javascript','Web缓存','ES6','Javascript','Web缓存','ES6','Javascript'],
+			searchRes : [],
+			archiveItems : ['全部'],
 			activeIndex : 0
 		}
 	},
+	methods : {
+		getArchi (tag) {
+			var _this = this;
+			this.$ajax({
+				method: 'get',
+				url: "/api/article/getByTag?tagName=" + tag,
+			}).then(function(res){
+				if(res.data.result == "success") {
+					_this.searchRes = res.data.message;
+				}
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		},
+		getAllArchi () {
+			var _this = this;
+			this.$ajax({
+				method: 'get',
+				url: "/api/article/getAllArticles" ,
+			}).then(function(res){
+				if(res.data.result == "success") {
+					_this.searchRes = res.data.message;
+				}
+			})
+			.catch(function(err){
+				console.log(err);
+			})
+		},
+		tagHandle (index, tag) {
+			this.activeIndex = index;
+			this.activeIndex != 0 && this.getArchi(tag);
+			this.activeIndex == 0 && this.getAllArchi();
+		}
+	},
 	components: {
-
+		searchRender
+	},
+	mounted () {
+		var _this = this;
+		this.$ajax({
+			method: 'get',
+			url: "/api/tag/getAll",
+		}).then(function(res){
+			if(res.data.result == "success") {
+				_this.archiveItems.splice(1, _this.archiveItems.length);
+				var newArr = _this.archiveItems.concat(res.data.message);
+				_this.archiveItems = newArr;
+			}
+		})
+		.catch(function(err){
+			console.log(err);
+		});
+		this.getAllArchi();
 	}
 }
 </script>
@@ -92,33 +126,7 @@ export default {
 			.tag-active {
 				color : $decorateColor;
 			}
-		}	
-		.search-item {
-			text-align: left;
-			font-size: 1.0rem;
-			>p {
-				@include border(0,0,1,0,dashed);
-				margin-bottom: 8px;	
-				padding: 8px 20px;		
-			}
-			li {
-				margin-left: 50px;
-				list-style: square;
-				padding: 8px;
-			}
 		}
-		.sign {
-			color : $decorateColor;
-			margin-right: 5px;
-			font-size: 1.0rem;
-		}
-		.search-title {
-			margin-left: 25px;
-			cursor: pointer;
-			&:hover {
-				color : $decorateColor;
-			}
-		}	
 	}
 }
 

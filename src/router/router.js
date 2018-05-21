@@ -26,6 +26,12 @@ const router = new VueRouter({
 	routes: [
 		{
 			path: '/',
+			redirect: '/articleList/1'
+		},{
+			path: '/articleList',
+			redirect: '/articleList/1'
+		},{
+			path: '/articleList/:pageNum',
 			component: index
 		},{
 			name:'articles',

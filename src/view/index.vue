@@ -2,14 +2,17 @@
     <div  class="indexPage clearfix">
       	<selfIntro></selfIntro>
       	<div class="right-cont">
-		  	<articlePrev 
-                v-for="(artic , index) in articDatas" 
-                :key='index'
-                :article='artic'>
-            </articlePrev>
+            <transition-group name="fade">
+		  	    <articlePrev 
+                    v-for="(artic , index) in articDatas" 
+                    :key='index'
+                    :article='artic'>
+                </articlePrev>
+            </transition-group>
             <pagination
                 :page-count="pageCount"
-                :page-current="1">
+                :page-current="1"
+                @jumpPage="routeGo">
             </pagination>
       	</div>
     </div>
@@ -24,7 +27,6 @@ export default {
     data () {
         return {
             articDatas : [],
-            nowPage : 1,
             pageCount : 1
         }
     },
@@ -35,32 +37,36 @@ export default {
     },
     methods : {
         getPageNum () {
-            var vm = this;
+            var _this = this;
             this.$ajax({
                 method: 'get',
                 url: '/api/article/getPageNum',
             }).then(function(res){
                 if(res.data.result == "success") {
-                    vm.pageCount = res.data.message;
+                    console.log('更新')
+                    _this.pageCount = res.data.message;
                 }
             })
             .catch(function(err){
                 console.log(err);
             })
         },
-        getArtic () {
-            var vm = this;
+        getArtic (num) {
+            var _this = this;
             this.$ajax({
                 method: 'get',
-                url: '/api/article/getByPage?page=' + vm.nowPage,
+                url: '/api/article/getByPage?page=' + _this.$route.params.pageNum,
             }).then(function(res){
                 if(res.data.result == "success") {
-                    vm.articDatas = res.data.message;
+                    _this.articDatas = res.data.message;
                 }
             })
             .catch(function(err){
                 console.log(err);
             })
+        },
+        routeGo (num) {
+            this.$router.push(num.toString());
         }
     },
     watch: {
@@ -69,6 +75,7 @@ export default {
     },
     created (){
         this.getArtic();
+        this.getPageNum();
   }
 }
 </script>

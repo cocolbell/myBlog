@@ -45,7 +45,7 @@ articleSchema.statics.findAllFileds = function (filed) {
 
 articleSchema.statics.findByTag = function (tagVal) {
 	return this.find({})
-				.where('tag')
+				.where('tags')
 				.in([tagVal])
 				.exec()
 }

@@ -80,8 +80,8 @@ export default {
     created (){
         
     },
-    computed :{
-        articPrev: function(){
+    computed : {
+        articPrev: function() {
             return marked(this.articCont);
         }
     }
